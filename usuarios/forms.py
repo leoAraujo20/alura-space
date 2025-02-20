@@ -38,7 +38,7 @@ class CadastroForm(forms.Form):
         )
     )
 
-    emai = forms.EmailField(
+    email = forms.EmailField(
         label='Email',
         required=True,
         max_length=100,
