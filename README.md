@@ -1,6 +1,6 @@
 # Alura Space
 
-Este é um projeto desenvolvido durante os cursos da Alura para fortalecer o conhecimento em Django. O projeto consiste em uma galeria de fotografias onde os usuários podem visualizar, buscar e gerenciar fotografias.
+Este é um projeto desenvolvido durante os cursos da Alura para fortalecer o meu conhecimento em Django. O projeto consiste em uma galeria de fotografias espaciais onde os usuários podem visualizar, buscar e gerenciar fotografias.
 
 ## Funcionalidades
 
@@ -70,9 +70,8 @@ Este é um projeto desenvolvido durante os cursos da Alura para fortalecer o con
    ```
 
 9. Acesse o projeto no navegador:
-   ```
+   ```sh
    http://127.0.0.1:8000
-   
    ```
    
     
