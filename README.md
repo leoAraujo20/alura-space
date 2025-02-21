@@ -53,23 +53,37 @@ Este é um projeto desenvolvido durante os cursos da Alura para fortalecer o meu
    ```sh
    pip install -r requirements.txt
    ```
+6. Crie um arquivo `.env` na raiz do projeto:
+   ```sh
+   touch .env
+   ```
 
-6. Realize as migrações do banco de dados:
+7. Gere uma chave secreta aleatória usando Python e Django:
+   ```sh
+   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+   ```
+
+8. Copie a saída do comando acima e cole no arquivo `.env`, ficando assim:
+   ```sh
+   SECRET_KEY=sua_chave_secreta_gerada_aqui
+   ```
+
+9. Realize as migrações do banco de dados:
    ```sh
    python manage.py migrate
    ```
 
-7. Crie um superusuário para acessar o painel administrativo (opcional, mas recomendado):
+10. Crie um superusuário para acessar o painel administrativo (opcional, mas recomendado):
    ```sh
    python manage.py createsuperuser
    ```
 
-8. Inicie o servidor de desenvolvimento:
+11. Inicie o servidor de desenvolvimento:
    ```sh
    python manage.py runserver
    ```
 
-9. Acesse o projeto no navegador:
+12. Acesse o projeto no navegador:
    ```sh
    http://127.0.0.1:8000
    ```
