@@ -53,14 +53,15 @@ Este é um projeto desenvolvido durante os cursos da Alura para fortalecer o meu
    ```sh
    pip install -r requirements.txt
    ```
-6. Crie um arquivo `.env` na raiz do projeto:
+6. Crie um arquivo `.env` na raiz do projeto e entre no shell interativo do django com o comando:
    ```sh
-   touch .env
+   python manage.py shell
    ```
 
-7. Gere uma chave secreta aleatória usando Python e Django:
+7. Gere uma chave secreta aleatória usando o codigo:
    ```sh
-   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+   from django.core.management.utils import get_random_secret_key
+   print(get_random_secret_key())
    ```
 
 8. Copie a saída do comando acima e cole no arquivo `.env`, ficando assim:
@@ -74,19 +75,16 @@ Este é um projeto desenvolvido durante os cursos da Alura para fortalecer o meu
    ```
 
 10. Crie um superusuário para acessar o painel administrativo (opcional, mas recomendado):
-   ```sh
-   python manage.py createsuperuser
-   ```
+      ```sh
+      python manage.py createsuperuser
+      ```
 
 11. Inicie o servidor de desenvolvimento:
-   ```sh
-   python manage.py runserver
-   ```
+      ```sh
+      python manage.py runserver
+      ```
 
 12. Acesse o projeto no navegador:
-   ```sh
-   http://127.0.0.1:8000
-   ```
-   
-    
-
+      ```sh
+      http://127.0.0.1:8000
+      ```
