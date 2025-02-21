@@ -32,7 +32,7 @@ Este é um projeto desenvolvido durante os cursos da Alura para fortalecer o meu
    ```sh
    git clone https://github.com/leoAraujo20/alura-space.git
 
-2. Navegue até o diretório do projetio:
+2. Navegue até o diretório do projeto:
    ```sh
    cd alura-space
 
