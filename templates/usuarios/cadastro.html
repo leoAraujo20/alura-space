@@ -20,11 +20,7 @@
     <div class="pagina-inicial">
         <header class="cabecalho">
             <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
-            {% for message in messages %}
-                <div class="alert alert-primary">
-                    <p id="messages">{{message}}</p>
-                </div>
-            {% endfor %}
+            {% include "partials/_alertas.html" %}
             <div class="cabecalho__busca">
                 <div class="busca__fundo">
                     <form action="{% url 'buscar' %}">
@@ -37,14 +33,7 @@
             </div>
         </header>
         <main class="principal">
-            <section class="menu-lateral">
-                <nav class="menu-lateral__navegacao">
-                    <a href="{% url 'index' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
-                    <a href="{% url 'login' %}"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}"> Login</a>
-                    <a href="{% url 'cadastro' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Cadastrar</a>
-                    <a href="{% url 'logout' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Logout</a>
-                </nav>
-            </section>
+            {% include "partials/_lateral.html" %}
             <section class="galeria" style="margin-left: 5em">
                 <form action="{% url 'cadastro' %}" method="POST">
                     {% csrf_token %}
@@ -55,9 +44,7 @@
                                 {{ field }}
                             </div>
                             {% for error in field.errors %}
-                                <div class="alert alert-danger">
-                                    {{error}}
-                                </div>
+                                <div class="alert alert-danger">{{ error }}</div>
                             {% endfor %}
                         {% endfor %}
                         <div>
@@ -72,4 +59,4 @@
     </div>
 </body>
 
-{% include 'galeria/partials/_footer.html' %}
+{% include 'partials/_footer.html' %}
