@@ -72,4 +72,25 @@ class CadastroForm(forms.Form):
                 'placeholder': 'Digite sua senha novamente.'
             }
         )
-    )  
+    )
+
+    def clean_nome_cadastro(self):
+        nome = self.cleaned_data.get('nome_cadastro')
+
+        if nome:
+            nome = nome.strip()
+
+            if ' ' in nome:
+                raise forms.ValidationError('Não é permitido espaços no nome de usuário')
+            else:
+                return nome 
+    
+    def clean_senha2(self):
+        senha1 = self.cleaned_data.get('senha1')
+        senha2 = self.cleaned_data.get('senha2')
+
+        if senha1 and senha2:
+            if senha1 != senha2:
+                raise forms.ValidationError('As senhas não são iguais')
+            else:
+                return senha2
