@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.galeria.apps.GaleriaConfig',
     'apps.usuarios.apps.UsuariosConfig',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -116,11 +117,47 @@ USE_I18N = True
 
 USE_TZ = True
 
+# ...
+
+# AWS Configuração
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": os.getenv('AWS_ACCESS_KEY_ID'),
+            "secret_key": os.getenv('AWS_SECRET_ACCESS_KEY'),
+            "bucket_name": os.getenv('AWS_STORAGE_BUCKET_NAME'),
+            "custom_domain": f"{os.getenv('AWS_STORAGE_BUCKET_NAME')}.s3.amazonaws.com",
+            "default_acl": "public-read",
+            "object_parameters": {
+                "CacheControl": "max-age=86400",
+            },
+            "location": "media",
+            "querystring_auth": False,
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": os.getenv('AWS_ACCESS_KEY_ID'),
+            "secret_key": os.getenv('AWS_SECRET_ACCESS_KEY'),
+            "bucket_name": os.getenv('AWS_STORAGE_BUCKET_NAME'),
+            "custom_domain": f"{os.getenv('AWS_STORAGE_BUCKET_NAME')}.s3.amazonaws.com",
+            "default_acl": "public-read",
+            "object_parameters": {
+                "CacheControl": "max-age=86400",
+            },
+            "location": "static",
+            "querystring_auth": False,
+        },
+    },
+}
+
+# ...
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = 'static/'
+STATIC_URL = f'https://{os.getenv("AWS_STORAGE_BUCKET_NAME")}.s3.amazonaws.com/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'setup/static')
@@ -131,7 +168,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #Media
 MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
 
-MEDIA_URL = '/media/'
+MEDIA_URL = f'https://{os.getenv("AWS_STORAGE_BUCKET_NAME")}.s3.amazonaws.com/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
