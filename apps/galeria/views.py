@@ -27,7 +27,7 @@ def buscar(request):
         if nome_a_buscar:
             fotografias = fotografias.filter(nome__icontains=nome_a_buscar)
     
-    return render (request, 'galeria/buscar.html', {'cards':fotografias})
+    return render (request, 'galeria/index.html', {'cards':fotografias})
 
 def nova_imagem(request):
     if not request.user.is_authenticated:
@@ -45,8 +45,25 @@ def nova_imagem(request):
 
     return render(request, 'galeria/nova_imagem.html', {'form': form})
 
-def editar_imagem(request):
-    pass
+def editar_imagem(request, foto_id):
+    fotografia = get_object_or_404(Fotografia, id=foto_id)
+    form = FotografiaForm(instance=fotografia)
 
-def remover_imagem(request):
-    pass
+    if request.method == 'POST':
+        form = FotografiaForm(request.POST, request.FILES, instance=fotografia)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Fotografia atualizada com sucesso!')
+            return redirect('imagem', foto_id=foto_id)
+    
+    return render(request, 'galeria/editar_imagem.html', {'form': form, 'foto_id':foto_id})
+
+def remover_imagem(request, foto_id):
+    fotografia = get_object_or_404(Fotografia, id=foto_id)
+    fotografia.delete()
+    messages.success(request, 'Fotografia removida com sucesso!')
+    return redirect('index')
+
+def filtro(request, categoria):
+    fotografias = Fotografia.objects.filter(categoria=categoria, publicado=True).order_by('-data_fotografia')
+    return render(request, 'galeria/index.html', {'cards': fotografias})
